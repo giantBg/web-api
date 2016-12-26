@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.1.xsd   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 设置使用注解的类所在的jar包 -->
+    <context:component-scan base-package="com.ishansong.config,com.bingcore.web"/>
+    <!--将静态资源的处理经由Spring MVC框架交回Web应用服务器处理-->
+    <mvc:default-servlet-handler/>
+    <!--使用spring mvc中的@Controller注解-->
+    <mvc:annotation-driven/>
+    <!-- 启用spring mvc 注解 -->
+    <context:annotation-config/>
+    <!--启用aop注解-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!-- 使用disconf必须添加以下配置 -->
+    <bean id="disconfMgrBean" class="com.ishansong.config.client.DisconfMgrBean"
+          destroy-method="destroy">
+        <property name="scanPackage" value="com.bingcore.web"/>
+    </bean>
+    <bean id="disconfMgrBeanSecond" class="com.ishansong.config.client.DisconfMgrBeanSecond"
+          init-method="init" destroy-method="destroy">
+    </bean>
+    <!-- 使用托管方式的disconf配置(无代码侵入, 配置更改不会自动reload)-->
+    <bean id="configproperties_no_reloadable_disconf"
+          class="com.ishansong.config.client.addons.properties.ReloadablePropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>redis.properties</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="propertyConfigurerForProject1"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="propertiesArray">
+            <list>
+                <ref bean="configproperties_no_reloadable_disconf"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- app properties -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath*:/app.properties</value>
+            </list>
+        </property>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+    </bean>
+
+    <!--active mq config-->
+    <bean id="goodsMessageSender" class="com.ishansong.activemq.MessageSender">
+        <property name="brokerUrl" value="${brokerUrl}"/>
+        <property name="queues" value="${mqQueues}"/>
+    </bean>
+
+    <!--rpc service-->
+    <import resource="service-context.xml"/>
+
+</beans>
