@@ -92,38 +92,5 @@ public class UtilTest {
 
 
     public static void main(String args[]) {
-/*
-        List<Integer> a = Lists.newArrayList(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                1, 3, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 3, 0, 1, 3, 1,
-                1, 0, 3, 0, 1, 1, 3, 1, 1, 2, 3, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 0, 3, 0, 1);
-
-        Map<String, List<Integer>> timeMaps = Maps.newLinkedHashMap();
-
-        Integer startIndex = a.indexOf(0);
-        Integer endIndex = a.lastIndexOf(0);
-        System.out.println("start:" + startIndex + "\t end:" + endIndex);
-
-        for (int i = startIndex+1; i < endIndex; i++) {
-            Integer innerStart = i;
-
-
-            List<Integer> lastestData = Lists.newArrayList();
-            lastestData.add(currentEle);
-
-            if (currentEle > 0)
-                continue;
-            lastestData.add(currentEle);
-
-            timeMaps.put("span_" + i, lastestData);
-        }
-
-
-        for (Map.Entry<String, List<Integer>> entry : timeMaps.entrySet()) {
-            String titileDay = entry.getKey();
-            List<Integer> timePeriods = entry.getValue();
-            System.out.println("title:" + titileDay + "\t [" + timePeriods.get(0) +
-                    "," + timePeriods.get(1) + "]");
-        }*/
     }
 }
