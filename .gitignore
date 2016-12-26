@@ -48,7 +48,6 @@ Thumbs.db
 */build
 /generated-sources
 */generated-sources
-*Thunderbolt/core/generated-sources/*
 var
 logs
 
@@ -73,7 +72,8 @@ atlassian-ide-plugin.xml
 .nbattrs
 *.orig
 
-#dev.properties
+*/my/*
 
-*.iml
-
+dev.properties
+web-api.properties
+web-api.properties.lock
