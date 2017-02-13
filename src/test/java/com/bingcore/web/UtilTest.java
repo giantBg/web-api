@@ -8,10 +8,7 @@ import com.google.common.math.LongMath;
 import com.google.common.primitives.Ints;
 import com.ishansong.common.date.Dates;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by xubing on 16/8/9.
@@ -90,7 +87,13 @@ public class UtilTest {
     }
 
 
-
     public static void main(String args[]) {
+        String nowDayStr = Dates.now("yyyyMMdd");
+        System.out.println("now Day is :" + nowDayStr);
+
+        ArrayList a = Lists.newArrayList(8,3);
+        System.out.println("list length is :"+a.size());
+        System.out.println("a:"+a.get(0)+"\t"+a.get(a.size()-1));
+
     }
 }
